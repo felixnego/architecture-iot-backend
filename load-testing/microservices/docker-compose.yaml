@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+    express-service-1:
+        build: ../express-monolith/
+    express-service-2:
+        build: ../express-monolith/
+
+    fastapi-service-1:
+        build: ../fastapi-monolith/
+    fastapi-service-2:
+        build: ../fastapi-monolith/
+
+    flask-service-1:
+        build: ../flask-monolith/
+    flask-service-2:
+        build: ../flask-monolith/
+
+    api-gateway:
+        build: ./
+        ports:
+            - "80:80"
+        depends_on:
+            - express-service-1
+            - express-service-2
+            - fastapi-service-1
+            - fastapi-service-2
+            - flask-service-1
+            - flask-service-2
